@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <style>
+            .c589305 {
+                font-family: Calibri, Arial, sans-serif;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+                max-width: 800px;
+                max-height: 600px;
+                margin: auto;
+                overflow-y: auto;
+                overflow-x: hidden;
+                padding: 70px;
+                border-radius: 25px;
+                
+            }
+            h1{
+                text-align: center;
+                font-size: 26px;
+                color: navy;
+                margin-bottom: 10px; /* Adjust the margin-bottom to decrease spacing */
+                margin-left: 20px; /* Adjust left margin to make it more narrow */
+                margin-right: 20px; /* Adjust right margin to make it more narrow */
+            }
+            h3{
+                text-align:center;
+            }
+            p{
+                text-align: center;
+            }
+            p#countdown {
+                color: red;
+                font-size: 24px;
+                font-weight: bold;
+                margin-top: 5px; /* Adjust the margin-top to decrease spacing */
+            }
+        </style>
+    </head>
+    <body class="c589305">
+        <h1>Countdown to Graduation!</h1>
+        <h3>May 23, 2025</h3>
+        <p id="countdown"></p>
+        <p><small>Credits: Aidan Varghese (Class of 2026), Eshaan Deshmuhk (Class of 2026), Alan Ge (Class of 2026), Ahren Murray (Class of 2025)</small></p>
+        <script>
+            // Set the countdown date to May 24, and a selected gradYear
+            var gradYear = 2025
+            var countdownDate = new Date(gradYear, 4, 24).getTime();
+            var daysOff = [
+                [gradYear-1, 8, 4],
+                [gradYear-1, 8, 18],
+                [gradYear-1, 9, 9],
+                [gradYear-1, 9, 10],
+                [gradYear-1, 9, 11],
+                [gradYear-1, 9, 12],
+                [gradYear-1, 9, 13],
+                [gradYear-1, 10, 11],
+                [gradYear-1, 10, 20],
+                [gradYear-1, 10, 21],
+                [gradYear-1, 10, 22],
+                [gradYear-1, 10, 23],
+                [gradYear-1, 10, 24],
+                [gradYear-1, 11, 25],
+                [gradYear-1, 11, 26],
+                [gradYear-1, 11, 27],
+                [gradYear-1, 11, 28],
+                [gradYear-1, 11, 29],
+                [gradYear, 0, 1],
+                [gradYear, 0, 2],
+                [gradYear, 0, 3],
+                [gradYear, 0, 4],
+                [gradYear, 0, 5],
+                [gradYear, 0, 8],
+                [gradYear, 0, 15],
+                [gradYear, 1, 19],
+                [gradYear, 1, 20],
+                [gradYear, 2, 11],
+                [gradYear, 2, 12],
+                [gradYear, 2, 13],
+                [gradYear, 2, 14],
+                [gradYear, 2, 15],
+                [gradYear, 2, 29],
+                [gradYear, 3, 22]
+            ];
+           
+            // Update the countdown every second
+            var countdownTimer = setInterval(function() {
+                // Get the current date and time 86400
+                var now = new Date().getTime();
+                var t = 0;
+                var temp;
+                //exclude days off
+                for(let i = 0; i < daysOff.length; i++){
+                    temp = new Date(daysOff[i][0], daysOff[i][1], daysOff[i][2]).getTime();
+                    if(now < temp){
+                        t++;
+                    }
+                }
+                // Calculate the time remaining
+                var distance = countdownDate - now + (1000 * 60 * 60 * 24);
+   
+                // Exclude weekends (Saturday and Sunday)
+                var daysRemaining = Math.ceil(distance / (1000 * 60 * 60 * 24) - 1);
+                var weekendsRemaining = Math.floor(daysRemaining / 7);
+                var remainingWeekdays = daysRemaining - (weekendsRemaining * 2) - t;
+   
+                // Display the countdown
+                document.getElementById("countdown").innerHTML = remainingWeekdays + " days";
+   
+                // If the countdown ends
+                if (distance < 0) {
+                    clearInterval(countdownTimer);
+                    document.getElementById("countdown").innerHTML = "Congratulations, Class of "+gradYear+"!";
+                }
+            }, 1000);
+        </script>
+    </body>
+</html>
